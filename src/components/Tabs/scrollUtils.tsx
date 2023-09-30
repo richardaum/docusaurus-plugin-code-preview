@@ -22,7 +22,7 @@ export const useIsomorphicLayoutEffect = ExecutionEnvironment.canUseDOM
   : useEffect;
 
 export function useEvent<T extends (...args: never[]) => unknown>(
-  callback: T,
+  callback: T
 ): T {
   const ref = useRef<T>(callback);
 
@@ -57,12 +57,12 @@ function useScrollControllerContextValue(): ScrollController {
         scrollEventsEnabledRef.current = false;
       },
     }),
-    [],
+    []
   );
 }
 
 const ScrollMonitorContext = React.createContext<ScrollController | undefined>(
-  undefined,
+  undefined
 );
 
 export function ScrollControllerProvider({
@@ -88,12 +88,12 @@ export function ScrollControllerProvider({
 export function useScrollController(): ScrollController {
   const context = useContext(ScrollMonitorContext);
   if (context == null) {
-    throw new Error ('Missing ScrollControllerProvider');
+    throw new Error('Missing ScrollControllerProvider');
   }
   return context;
 }
 
-type ScrollPosition = {scrollX: number; scrollY: number};
+type ScrollPosition = { scrollX: number; scrollY: number };
 
 const getScrollPosition = (): ScrollPosition | null =>
   ExecutionEnvironment.canUseDOM
@@ -114,11 +114,11 @@ const getScrollPosition = (): ScrollPosition | null =>
 export function useScrollPosition(
   effect: (
     position: ScrollPosition,
-    lastPosition: ScrollPosition | null,
+    lastPosition: ScrollPosition | null
   ) => void,
-  deps: unknown[] = [],
+  deps: unknown[] = []
 ): void {
-  const {scrollEventsEnabledRef} = useScrollController();
+  const { scrollEventsEnabledRef } = useScrollController();
   const lastPositionRef = useRef<ScrollPosition | null>(getScrollPosition());
 
   const dynamicEffect = useEvent(effect);
@@ -152,11 +152,11 @@ type UseScrollPositionSaver = {
    * Restore the page position to keep the stored element's position from
    * the top of the viewport, and remove the stored details.
    */
-  restore: () => {restored: boolean};
+  restore: () => { restored: boolean };
 };
 
 function useScrollPositionSaver(): UseScrollPositionSaver {
-  const lastElementRef = useRef<{elem: HTMLElement | null; top: number}>({
+  const lastElementRef = useRef<{ elem: HTMLElement | null; top: number }>({
     elem: null,
     top: 0,
   });
@@ -170,22 +170,22 @@ function useScrollPositionSaver(): UseScrollPositionSaver {
 
   const restore = useCallback(() => {
     const {
-      current: {elem, top},
+      current: { elem, top },
     } = lastElementRef;
     if (!elem) {
-      return {restored: false};
+      return { restored: false };
     }
     const newTop = elem.getBoundingClientRect().top;
     const heightDiff = newTop - top;
     if (heightDiff) {
-      window.scrollBy({left: 0, top: heightDiff});
+      window.scrollBy({ left: 0, top: heightDiff });
     }
-    lastElementRef.current = {elem: null, top: 0};
+    lastElementRef.current = { elem: null, top: 0 };
 
-    return {restored: heightDiff !== 0};
+    return { restored: heightDiff !== 0 };
   }, []);
 
-  return useMemo(() => ({save, restore}), [restore, save]);
+  return useMemo(() => ({ save, restore }), [restore, save]);
 }
 
 /**
@@ -210,7 +210,7 @@ export function useScrollPositionBlocker(): {
   const scrollPositionSaver = useScrollPositionSaver();
 
   const nextLayoutEffectCallbackRef = useRef<(() => void) | undefined>(
-    undefined,
+    undefined
   );
 
   const blockElementScrollPositionUntilNextRender = useCallback(
@@ -218,7 +218,7 @@ export function useScrollPositionBlocker(): {
       scrollPositionSaver.save(el);
       scrollController.disableScrollEvents();
       nextLayoutEffectCallbackRef.current = () => {
-        const {restored} = scrollPositionSaver.restore();
+        const { restored } = scrollPositionSaver.restore();
         nextLayoutEffectCallbackRef.current = undefined;
 
         // Restoring the former scroll position will trigger a scroll event. We
@@ -235,7 +235,7 @@ export function useScrollPositionBlocker(): {
         }
       };
     },
-    [scrollController, scrollPositionSaver],
+    [scrollController, scrollPositionSaver]
   );
 
   useLayoutEffect(() => {
@@ -253,7 +253,7 @@ export function useScrollPositionBlocker(): {
 type CancelScrollTop = () => void;
 
 function smoothScrollNative(top: number): CancelScrollTop {
-  window.scrollTo({top, behavior: 'smooth'});
+  window.scrollTo({ top, behavior: 'smooth' });
   return () => {
     // Nothing to cancel, it's natively cancelled if user tries to scroll down
   };

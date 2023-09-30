@@ -100,7 +100,7 @@ export const PreviewFrame = ({
 const waitForFrame = (frame: HTMLIFrameElement) => {
   if (isFrameReady(frame)) return Promise.resolve();
 
-  return new Promise<void>(resolve => {
+  return new Promise<void>((resolve) => {
     frame.contentWindow!.addEventListener('demoReady', () => {
       resolve();
     });

@@ -30,7 +30,7 @@ function TabsComponent(props: any): JSX.Element {
   const [leftNavVisible, setLeftNavVisible] = useState(false);
   const [rightNavVisible, setRightNavVisible] = useState(false);
   const tabsNavEl = createRef<HTMLUListElement>();
-  const children = React.Children.map(props.children, child => {
+  const children = React.Children.map(props.children, (child) => {
     if (isValidElement(child) && isTabItem(child)) {
       return child;
     }
@@ -82,9 +82,8 @@ function TabsComponent(props: any): JSX.Element {
   // const { tabGroupChoices, setTabGroupChoices } = useTabGroupChoice();
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const tabRefs: (HTMLLIElement | null)[] = [];
-  const {
-    blockElementScrollPositionUntilNextRender,
-  } = useScrollPositionBlocker();
+  const { blockElementScrollPositionUntilNextRender } =
+    useScrollPositionBlocker();
 
   const handleTabChange = (
     event: React.FocusEvent<HTMLLIElement> | React.MouseEvent<HTMLLIElement>
@@ -195,7 +194,7 @@ function TabsComponent(props: any): JSX.Element {
               tabIndex={selectedValue === value ? 0 : -1}
               aria-selected={selectedValue === value}
               key={value}
-              ref={tabControl => tabRefs.push(tabControl)}
+              ref={(tabControl) => tabRefs.push(tabControl)}
               onKeyDown={handleKeydown}
               onFocus={handleTabChange}
               onClick={handleTabChange}

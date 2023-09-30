@@ -173,7 +173,7 @@ export const CodePreview = ({
       options.angularModuleOptions = codeUsageTarget.angularModuleOptions;
 
       options.files = Object.keys(codeSnippets[outputTarget])
-        .map(fileName => ({
+        .map((fileName) => ({
           [fileName]: hostRef.current!.querySelector<any>(
             `#${getCodeSnippetId(outputTarget, fileName)} code`
           )!.outerText,
@@ -193,7 +193,7 @@ export const CodePreview = ({
 
   useEffect(() => {
     const codeSnippets: any = {};
-    Object.keys(code).forEach(key => {
+    Object.keys(code).forEach((key) => {
       if (
         (code[key as keyof OutputTargetOptions] as OutputTargetOptions)
           .files !== undefined
@@ -249,7 +249,7 @@ export const CodePreview = ({
         }
         return (
           <Tabs className="playground__tabs">
-            {Object.keys(codeSnippets[outputTarget]).map(fileName => (
+            {Object.keys(codeSnippets[outputTarget]).map((fileName) => (
               <TabItem
                 className="playground__tab-item"
                 value={fileName}
@@ -276,9 +276,9 @@ export const CodePreview = ({
       <div className="code-preview__container">
         <div className="code-preview__control-toolbar">
           <div className="code-preview__control-group">
-            {Object.keys(code).map(key => {
+            {Object.keys(code).map((key) => {
               const target = output?.outputs.find(
-                o => o.value === key || o.name === key
+                (o) => o.value === key || o.name === key
               )!;
               const targetValue = target.value || target.name;
               return (
@@ -338,7 +338,7 @@ export const CodePreview = ({
            */}
           {props.previewMode === 'iframe' &&
             props.src &&
-            props.viewport.viewports.map(viewport => (
+            props.viewport.viewports.map((viewport) => (
               <PreviewFrame
                 key={`frame-${viewport.name}`}
                 isVisible={selectedViewport === viewport.name}

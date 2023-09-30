@@ -1,5 +1,5 @@
 /* Dark theme overrides */
-[data-theme="dark"] .code-preview {
+[data-theme='dark'] .code-preview {
   --code-preview-btn-color: #b4bcc6;
   --code-preview-btn-selected-color: #fff;
   --code-preview-btn-selected-background: #434f5e;
@@ -71,7 +71,8 @@
 }
 
 /** Vertical divider between control groups */
-.code-preview__control-group + .code-preview__control-group:not(.code-preview__control-group--end) {
+.code-preview__control-group
+  + .code-preview__control-group:not(.code-preview__control-group--end) {
   /* Only show the vertical divider when there is a control group after it */
   border-left: 1px solid var(--code-preview-separator-color);
 }
@@ -102,7 +103,9 @@
 
   appearance: none;
   cursor: pointer;
-  transition: background-color .2s, color .2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 /* Fix layout shifting when button is bolded on select */
@@ -148,7 +151,7 @@
 
   cursor: pointer;
   appearance: none;
-  transition: background .2s;
+  transition: background 0.2s;
 }
 
 .code-preview__icon-button--primary {
@@ -245,13 +248,13 @@
  * Tooltip is inserted into the DOM within the body element.
  * Styles scoped within this component will not be inherited.
  */
-.tippy-box[data-theme="code-preview"] {
+.tippy-box[data-theme='code-preview'] {
   background-color: #222d3a;
   border-radius: 8px;
   line-height: initial;
   font-size: 12px;
 }
 
-.tippy-box[data-theme="code-preview"] .tippy-content {
+.tippy-box[data-theme='code-preview'] .tippy-content {
   padding: 6px 10px;
 }
