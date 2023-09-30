@@ -79,7 +79,7 @@
     "@docusaurus/theme-classic": "^2.4.3",
     "@tippyjs/react": "^4.2.6"
   },
-  "overrides": {
-    "typescript": "^5"
+  "resolutions": {
+    "typescript": "^5.2.2"
   }
 }
