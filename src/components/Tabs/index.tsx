@@ -1,18 +1,15 @@
-import { duplicates } from '@docusaurus/theme-common/lib';
-import { useScrollPositionBlocker } from '@docusaurus/theme-common/src/utils/scrollUtils';
-
+import { duplicates } from '@docusaurus/theme-common';
 import clsx from 'clsx';
-
-import styles from './styles.module.css';
-import {
+import React, {
+  cloneElement,
   createRef,
   isValidElement,
   ReactElement,
-  useState,
   useEffect,
-  cloneElement,
+  useState,
 } from 'react';
-import React from 'react';
+import { useScrollPositionBlocker } from './scrollUtils';
+import styles from './styles.module.css';
 
 // A very rough duck type, but good enough to guard against mistakes while
 // allowing customization
