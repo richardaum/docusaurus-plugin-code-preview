@@ -17,7 +17,8 @@
     "lint": "tsdx lint src",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "release": "release-it"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -66,6 +67,7 @@
     "postcss": "^8.4.31",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "release-it": "^16.2.1",
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
